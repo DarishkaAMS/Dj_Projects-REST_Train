@@ -51,7 +51,7 @@ class ArticleAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+#Class based Views
 class ArticleDetails(APIView):
     def get_object(self, id):
         try:
@@ -79,7 +79,7 @@ class ArticleDetails(APIView):
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+#function based Views
 @api_view(['GET', 'POST'])
 def article_list(request):
     if request.method == "GET":
