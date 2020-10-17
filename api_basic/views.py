@@ -9,8 +9,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+
 
 # Create your views here.
 # @csrf_exempt
@@ -22,6 +23,7 @@ class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Crea
     queryset = Article.objects.all()
     lookup_field = 'id'
     authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None):
@@ -54,7 +56,8 @@ class ArticleAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#Class based Views
+
+# Class based Views
 class ArticleDetails(APIView):
     def get_object(self, id):
         try:
@@ -82,7 +85,8 @@ class ArticleDetails(APIView):
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#function based Views
+
+# function based Views
 @api_view(['GET', 'POST'])
 def article_list(request):
     if request.method == "GET":
