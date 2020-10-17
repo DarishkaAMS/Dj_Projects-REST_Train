@@ -18,10 +18,15 @@ from django.shortcuts import get_object_or_404
 # @csrf_exempt
 
 
-class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin,
-                     mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
+class ModelArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+
+
+# class GenericArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin,
+# mixins.UpdateModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
+#     serializer_class = ArticleSerializer
+#     queryset = Article.objects.all()
 
 # class ArticleViewSet(viewsets.ViewSet):
 #     def list(self, request):
