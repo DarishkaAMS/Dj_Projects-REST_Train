@@ -2,7 +2,7 @@ from rest_framework import serializers
 from api_basic.models import Article
 
 
-class ArticleSerializer(serializers.Serializer):
+class ArticleSerializer(serializers.ModelSerializer):
     #Using Modelserializer
     class Meta:
         model = Article
